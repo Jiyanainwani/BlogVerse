@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const port = process.env.PORT||8000;
-const userRoute = require("./routes/user");
+const userRoute = require("./routes/user"); 
 const blogRoute = require("./routes/blog");
 const Blog = require("./models/blog");
 require("dotenv").config(); 
