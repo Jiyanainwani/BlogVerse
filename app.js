@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const port = process.env.PORT;
+const port = process.env.PORT||8000;
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
 const Blog = require("./models/blog");
 require("dotenv").config(); 
+console.log('MONGO_URL:', process.env.MONGO_URL);
 
 
 
