@@ -5,15 +5,7 @@ const path = require("path");
 const Blog = require("../models/blog");
 const Comment = require("../models/comment")
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.resolve(`./public/images/uploads`));
-    },
-    filename: function (req, file, cb) {
-        const fileName = `${Date.now()}-${file.originalname}`;
-        cb(null, fileName);
-    }
-});
+const { storage } = require("../cloudinary");
 
 const upload = multer({ storage: storage });
 
@@ -50,7 +42,7 @@ router.post("/", upload.single('coverImage'), async (req, res) => {
         body,
         title,
         createdBy: req.user._id,
-        coverImageURL: `/images/uploads/${req.file.filename}`,
+        coverImageURL: req.file.path,
     })
     return res.redirect(`/blog/${blog._id}`);
 })
