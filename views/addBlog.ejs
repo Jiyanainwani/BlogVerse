@@ -9,46 +9,52 @@
         min-height: 100vh;
         margin: 0;
         color: white;
+        display: flex;
+        flex-direction: column;
       }
       .form-text {
         color: white;
+      }
+      main {
+        flex: 1;
       }
     </style>
   </head>
   <body>
     <%- include('./partials/nav') %>
-    <div class="container mt-3">
-      <form action="/blog" enctype="multipart/form-data" method="post">
-        <div class="mb-3">
-          <label for="coverImage" class="form-label">Cover Image</label>
-          <input
-            type="file"
-            class="form-control"
-            id="coverImage"
-            name="coverImage"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title" name="title" />
-        </div>
-        <div class="mb-3">
-          <label for="body">Body</label>
-          <textarea
-            name="body"
-            class="form-control"
-            id="floatingTextarea"
-          ></textarea>
-        </div>
-        <div class="mb-3">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
-    </div>
-    <footer
-      class="mt-5 py-3 text-center text-white"
-      style="background-color: #1e1e2f"
-    >
+
+    <main>
+      <div class="container mt-3">
+        <form action="/blog" enctype="multipart/form-data" method="post">
+          <div class="mb-3">
+            <label for="coverImage" class="form-label">Cover Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="coverImage"
+              name="coverImage"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" />
+          </div>
+          <div class="mb-3">
+            <label for="body">Body</label>
+            <textarea
+              name="body"
+              class="form-control"
+              id="floatingTextarea"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="mt-5 py-3 text-center text-white" style="background-color: #1e1e2f">
       <div class="container">
         &copy; <%= new Date().getFullYear() %> BlogVerse by
         <strong>Jiya Nainwani</strong>. All rights reserved.
