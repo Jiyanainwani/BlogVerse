@@ -5,14 +5,14 @@
     <title>Signin</title>
     <style>
       body {
- background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);    min-height: 100vh;
-    margin: 0;
-    color: white;
-  }
-  .form-text{
-    color: white;
-  }
-
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        min-height: 100vh;
+        margin: 0;
+        color: white;
+      }
+      .form-text {
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -20,11 +20,8 @@
 
     <div class="container mt-5">
       <form action="/user/signin" method="post">
-        
         <div class="mb-3">
-          <label for="email" class="form-label"
-            >Email address</label
-          >
+          <label for="email" class="form-label">Email address</label>
           <input
             type="email"
             name="email"
@@ -45,10 +42,21 @@
             id="password"
           />
         </div>
-        
+
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
+    <footer
+      class="mt-5 py-3 text-center text-white"
+      style="background-color: #1e1e2f"
+    >
+      <div class="container">
+        &copy; <%= new Date().getFullYear() %> BlogVerse by
+        <strong>Jiya Nainwani</strong>. All rights reserved.
+      </div>
+    </footer>
+
     <%- include('./partials/scripts') %>
   </body>
 </html>
+
