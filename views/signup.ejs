@@ -6,7 +6,6 @@
     <style>
       body {
         background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-        min-height: 100vh;
         margin: 0;
         color: white;
       }
@@ -15,51 +14,51 @@
       }
     </style>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/nav') %>
 
-    <div class="container mt-5">
-      <form action="/user/signup" method="post">
-        <div class="mb-3">
-          <label for="fullName" class="form-label">Full Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="fullName"
-            name="fullName"
-            aria-describedby="fullName"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            name="email"
-            class="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
+    <main class="flex-fill">
+      <div class="container mt-5">
+        <form action="/user/signup" method="post">
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fullName"
+              name="fullName"
+              aria-describedby="fullName"
+            />
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            name="password"
-            class="form-control"
-            id="password"
-          />
-        </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+            />
+          </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-    <footer
-      class="mt-5 py-3 text-center text-white"
-      style="background-color: #1e1e2f"
-    >
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </main>
+
+    <footer class="py-3 text-center text-white" style="background-color: #1e1e2f">
       <div class="container">
         &copy; <%= new Date().getFullYear() %> BlogVerse by
         <strong>Jiya Nainwani</strong>. All rights reserved.
