@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const categories = require("../services/blogCategories");
 
 const blogSchema = new Schema({
    title:{
@@ -9,6 +10,11 @@ const blogSchema = new Schema({
     type:String,
     required:true,
    },
+   category: {
+    type: String,
+    enum: categories,
+    default: "Other",
+   },
    coverImageURL:{
     type:String,
    },
@@ -16,6 +22,10 @@ const blogSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
    },
+   likes: [{
+    type: Schema.Types.ObjectId,
+    ref: "user",
+   }],
 
 },{timestamps:true });
 

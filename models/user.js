@@ -27,6 +27,10 @@ const usersSchema = new Schema({
         default: "/images/default.jpg",
 
     },
+    bookmarks: [{
+        type: Schema.Types.ObjectId,
+        ref: "blog",
+    }],
     role: {
         type: String,
         enum: ["USER", "ADMIN"],
@@ -51,13 +55,20 @@ usersSchema.pre('save', function (next) {
 });
 
 usersSchema.static('matchPasswordandGenerateToken', async function(email, password){
-   const user = await this.findOne({email});
-   if(!user) throw new Error('user not found!');
+   const normalizedEmail = String(email || "").trim().toLowerCase();
+   const user = await this.findOne({ email: normalizedEmail });
+   if(!user) {
+    const error = new Error("Invalid email or password");
+    error.code = "AUTH_INVALID_CREDENTIALS";
+    throw error;
+   }
    const salt = user.salt;
    const hashedPassword = user.password;
-   const userProvidedHash = createHmac('sha256',salt).update(password).digest("hex"); 
+   const userProvidedHash = createHmac('sha256',salt).update(String(password || "")).digest("hex");
    if(hashedPassword !== userProvidedHash) {
-    throw new Error("incorred password");
+    const error = new Error("Invalid email or password");
+    error.code = "AUTH_INVALID_CREDENTIALS";
+    throw error;
    }
 
    const token = createTokenForUser(user);

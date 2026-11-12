@@ -1,5 +1,10 @@
 const JWT = require("jsonwebtoken");
-const { validate } = require("../models/user");
+
+function getTokenSecret() {
+    const secret = process.env.TOKEN_SECRET || process.env.secret;
+    if (!secret) throw new Error("TOKEN_SECRET is not configured");
+    return secret;
+}
 
 
 
@@ -11,12 +16,12 @@ function createTokenForUser(user){
         role:user.role,
         fullName: user.fullName,
     };
-    const token = JWT.sign(payload,process.env.secret);
+    const token = JWT.sign(payload, getTokenSecret());
     return token;
 }
 
 function validateToken(token){
-    const payload = JWT.verify(token,process.env.secret);
+    const payload = JWT.verify(token, getTokenSecret());
     return payload;  
 }
 
