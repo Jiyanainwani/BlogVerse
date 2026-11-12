@@ -9,12 +9,12 @@
         <div><div class="eyebrow"><%= isBookmarks ? 'Your reading list' : 'Writer profile' %></div><h1><%= isBookmarks ? 'Saved stories' : author.fullName %></h1><p><%= blogs.length %> <%= isBookmarks ? 'saved' : 'published' %> stor<%= blogs.length === 1 ? 'y' : 'ies' %></p></div>
       </header>
       <% if (blogs.length) { %>
-        <div class="row g-4">
+        <div class="author-story-grid">
           <% blogs.forEach(blog => { %>
-            <div class="col-12 col-sm-6 col-lg-4 d-flex"><article class="card post-card w-100">
+            <article class="card post-card">
               <img src="<%= blog.coverImageURL || '/images/default.jpg' %>" class="card-img-top" alt="Cover for <%= blog.title %>" loading="lazy" />
               <div class="card-body d-flex flex-column"><span class="category-pill"><%= blog.category || 'Other' %></span><h2 class="card-title"><%= blog.title %></h2><a href="/blog/<%= blog._id %>" class="btn btn-outline-light mt-auto">Read story <span aria-hidden="true">→</span></a></div>
-            </article></div>
+            </article>
           <% }) %>
         </div>
       <% } else { %>

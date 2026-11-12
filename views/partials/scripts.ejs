@@ -17,7 +17,7 @@
         toggle.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
         toggle.setAttribute('title', `Switch to ${nextTheme} theme`);
         toggle.setAttribute('aria-pressed', String(theme === 'light'));
-        toggle.innerHTML = theme === 'dark' ? '☀ <span>Light theme</span>' : '☾ <span>Dark theme</span>';
+        toggle.textContent = theme === 'dark' ? '☀' : '☾';
       }
     };
     applyTheme(document.documentElement.dataset.theme || 'dark');
