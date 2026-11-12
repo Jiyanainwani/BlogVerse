@@ -3,6 +3,10 @@ const User = require('../models/user');
 const Blog = require('../models/blog');
 const router = Router();
 
+function authCookieOptions() {
+    return { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" };
+}
+
 router.get('/signin',(req,res)=>{
     return res.render("signin");
 });
@@ -20,7 +24,8 @@ router.post('/signup',async (req,res)=>{
 
     try {
         await User.create({ fullName, email, password });
-        return res.redirect("/");
+        const token = await User.matchPasswordandGenerateToken(email, password);
+        return res.cookie('token', token, authCookieOptions()).redirect("/");
     } catch (error) {
         if (error.code === 11000 && error.keyPattern?.email) {
             return res.status(409).render("signup", {
@@ -40,7 +45,7 @@ router.post("/signin",async (req,res,next)=>{
     try {
         const token = await User.matchPasswordandGenerateToken(email,password);
         
-        return res.cookie('token',token,{ httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" }).redirect("/");
+        return res.cookie('token',token,authCookieOptions()).redirect("/");
     } catch (error) {
         if (error.code === "AUTH_INVALID_CREDENTIALS") {
             return res.status(401).render('signin', { error: "Incorrect email or password.", email });

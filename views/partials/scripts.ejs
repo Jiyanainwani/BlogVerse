@@ -3,3 +3,28 @@
   integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
   crossorigin="anonymous"
 ></script>
+<script>
+  (() => {
+    const toggle = document.getElementById('themeToggle');
+    const navbar = document.querySelector('.custom-navbar');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const applyTheme = (theme) => {
+      document.documentElement.dataset.theme = theme;
+      if (navbar) navbar.setAttribute('data-bs-theme', theme);
+      if (themeMeta) themeMeta.content = theme === 'light' ? '#f7f4fc' : '#100d18';
+      if (toggle) {
+        const nextTheme = theme === 'dark' ? 'light' : 'dark';
+        toggle.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+        toggle.setAttribute('title', `Switch to ${nextTheme} theme`);
+        toggle.setAttribute('aria-pressed', String(theme === 'light'));
+        toggle.innerHTML = theme === 'dark' ? '☀ <span>Light theme</span>' : '☾ <span>Dark theme</span>';
+      }
+    };
+    applyTheme(document.documentElement.dataset.theme || 'dark');
+    toggle?.addEventListener('click', () => {
+      const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+      try { localStorage.setItem('blogverse-theme', nextTheme); } catch {}
+    });
+  })();
+</script>
